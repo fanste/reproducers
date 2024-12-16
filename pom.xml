@@ -1,0 +1,63 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.example</groupId>
+	<artifactId>hhh-18228</artifactId>
+	<version>1.0.0</version>
+	<name>hhh-18228</name>
+
+	<properties>
+		<version.com.h2database>2.3.232</version.com.h2database>
+		<version.junit>4.13.2</version.junit>
+		<version.org.hibernate>6.6.2.Final</version.org.hibernate>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.hibernate.tool</groupId>
+			<artifactId>hibernate-tools-maven</artifactId>
+			<version>${version.org.hibernate}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>${version.com.h2database}</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.hibernate.tool</groupId>
+				<artifactId>hibernate-tools-maven</artifactId>
+				<version>${version.org.hibernate}</version>
+				<dependencies>
+					<dependency>
+						<groupId>org.hibernate.tool</groupId>
+						<artifactId>hibernate-tools-orm</artifactId>
+						<version>${version.org.hibernate}</version>
+					</dependency>
+					<dependency>
+						<groupId>com.h2database</groupId>
+						<artifactId>h2</artifactId>
+						<version>${version.com.h2database}</version>
+					</dependency>
+				</dependencies>
+				<executions>
+					<execution>
+						<id>entity-generation</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>hbm2java</goal>
+						</goals>
+						<configuration>
+							<ejb3>true</ejb3>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>
