@@ -49,13 +49,14 @@ public class Main {
         out.println("Correct result: Just select the entity itself");
         out.println("------------------------------------------------------------------");
         sessionFactory.inSession(session -> {
-            var l = session.createQuery("""
+            var q = session.createQuery("""
                                 select qtUser
                                 from TblTestUser qtUser
                                     left join fetch qtUser.tblUserContacts
                                  where qtUser.varUserName = ?1""", TblTestUser.class)
-                    .setParameter(1, "User1")
-                    .getResultList();
+                    .setParameter(1, "User1");
+            out.println("Query: " + q.getQueryString());
+            var l = q.getResultList();
 
             l.forEach(tblUser -> {
                 out.println(tblUser + " -> " + tblUser.getIntUserId());
@@ -69,13 +70,14 @@ public class Main {
         out.println("Wrong result: Return a wrapper containing the selected entity");
         out.println("------------------------------------------------------------------");
         sessionFactory.inSession(session -> {
-            var l = session.createQuery("""
+            var q = session.createQuery("""
                                 select new hhh20178.Wrapper(qtUser)
                                 from TblTestUser qtUser
                                     left join fetch qtUser.tblUserContacts
                                  where qtUser.varUserName = ?1""", Wrapper.class)
-                    .setParameter(1, "User1")
-                    .getResultList();
+                    .setParameter(1, "User1");
+            out.println("Query: " + q.getQueryString());
+            var l = q.getResultList();
 
             l.forEach(w -> {
                 final TblTestUser tblUser = w.tblUser();
