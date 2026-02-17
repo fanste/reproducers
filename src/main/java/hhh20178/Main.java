@@ -7,7 +7,7 @@ import static java.lang.System.out;
 public class Main {
     public static void main(String[] args) {
         var sessionFactory =
-                new HibernatePersistenceConfiguration("HHH-20006 Reproducer")
+                new HibernatePersistenceConfiguration("HHH-20178 Reproducer")
                         .managedClasses(TblTestUser.class, TblTestUserContact.class)
                         // use H2 in-memory database
                         .jdbcUrl("jdbc:h2:mem:db1")
